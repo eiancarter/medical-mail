@@ -1,16 +1,15 @@
 import React from 'react';
 
 // Components
-import Navbar from '../components/home/Navbar';
-import Search from '../components/search/Search';
+import HomeNav from '../components/home/Navbar';
+import Filters from '../components/search/Filters';
 import ReportList from '../components/reports/ReportList';
 
 const Home = () => {
     return (
         <div>
-            <Navbar />
-            <h1>Medical</h1>
-            <Search />
+            <HomeNav />
+            <Filters />
             <ReportList />
         </div>
     )

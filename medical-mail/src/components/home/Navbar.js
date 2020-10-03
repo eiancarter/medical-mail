@@ -1,51 +1,25 @@
 import React from 'react';
 // Bootstrap
-import { Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
+// Images
+import MedicalLogo from '../../assets/img/icon.svg';
 
-const Navbar = () => {
+const HomeNav = () => {
     return (
         <>
         <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+            <img style={{width:'50px'}} src={MedicalLogo} alt='logo'/>
+            <Navbar.Brand href="/">Medical Mail</Navbar.Brand>
             <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+                <Nav.Link href="/">All Reports</Nav.Link>
             </Nav>
             <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-info">Search</Button>
-            </Form>
-        </Navbar>
-        <br />
-        <Navbar bg="primary" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
-            <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-light">Search</Button>
-            </Form>
-        </Navbar>
-
-        <br />
-        <Navbar bg="light" variant="light">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
-            <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-primary">Search</Button>
+                <FormControl style={{width:'500px'}} type="text" placeholder="Search Reports" className="mr-sm-4" />
+                <Button variant="outline-info">Search</Button>
             </Form>
         </Navbar>
         </>
     )
 }
 
-export default Navbar;
+export default HomeNav;
