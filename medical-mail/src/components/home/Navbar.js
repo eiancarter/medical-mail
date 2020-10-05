@@ -1,10 +1,12 @@
 import React from 'react';
 // Bootstrap
-import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 // Images
 import MedicalLogo from '../../assets/img/icon.svg';
+// Components
+import Search from '../search/Search';
 
-const HomeNav = () => {
+const HomeNav = ({reports, results, setResults, input, setInput}) => {
     return (
         <>
         <Navbar bg="dark" variant="dark">
@@ -13,10 +15,13 @@ const HomeNav = () => {
             <Nav className="mr-auto">
                 <Nav.Link href="/">All Reports</Nav.Link>
             </Nav>
-            <Form inline>
-                <FormControl style={{width:'500px'}} type="text" placeholder="Search Reports" className="mr-sm-4" />
-                <Button variant="outline-info">Search</Button>
-            </Form>
+            <Search 
+                input={input}
+                setInput={setInput}
+                reports={reports}
+                results={results}
+                setResults={setResults}
+            />
         </Navbar>
         </>
     )
