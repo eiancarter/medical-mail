@@ -1,21 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-// Components
-import ReportCard from './ReportCard';
 // Bootstrap
-import { Table, Button, Pagination } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
 const ReportList = ({results, input}) => {
 
-    let active = 1;
-    let items = [];
-
-    for (let number = 1; number <= 5; number++) {
-        items.push(
-            <Pagination.Item key={number} active={number === active}>
-                <Button onClick={''} variant="outline-info">{number}</Button>
-            </Pagination.Item>
-        )
+    function renderTags(tags){
+        if (tags.length > 0) {
+            return (
+            <td>{tags.map(tag => <Button variant="info">{tag}</Button>)}</td>
+            )
+        } else {
+            return <td>No tags.</td>
+        }
     }
 
     function showResults() {
@@ -29,8 +26,8 @@ const ReportList = ({results, input}) => {
                             <tr>
                                 <td>{report.id}</td>
                                 <td>{report.preview}</td>
-                                <td>#example tag</td>
-                                <td><Link to={`/${report.id}`} variant="outline-info">view report</Link></td>
+                                {renderTags(report.labels)}
+                                <td><Link exact={true} to={`/report/${report.id}`} variant="outline-info">view report</Link></td>
                             </tr>
                         </tbody>
                     )
@@ -42,19 +39,16 @@ const ReportList = ({results, input}) => {
     return (
         <div>
             <Table striped bordered hover variant="dark">
-            <thead>
-                <tr>
-                <th>ID</th>
-                <th>Report Preview</th>
-                <th>Tags</th>
-                <th>Link</th>
-                </tr>
-            </thead>
-            {showResults()}
+                <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>Report Preview</th>
+                    <th>Tags</th>
+                    <th>Link</th>
+                    </tr>
+                </thead>
+                {showResults()}
             </Table>
-            <div>
-                <Pagination style={{display:'flex', justifyContent:'center'}}>{items}</Pagination>
-            </div>
         </div>
     )
 }
