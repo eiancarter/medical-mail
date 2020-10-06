@@ -3,16 +3,24 @@ import React, { useEffect } from 'react';
 import { Form, FormControl } from 'react-bootstrap';
 // Report Data
 
-const Search = ({reports, setResults, input, setInput}) => {
+const Search = (props) => {
+
+    const {reports, setResults, input, setInput} = props;
 
     const handleChange = e => {
         setInput(e.target.value)
     };
 
     useEffect(() => {
-        const filteredReports = reports.filter(report => 
-            report.preview.toLowerCase().includes(input)    
-        );
+        const filteredReports = reports.filter(report => {
+            const tags = report.labels;
+            for (let i=0; i < tags.length; i++) {
+                if (tags[i].includes(input)) {
+                    return report
+                }
+            }
+            return report.preview.toLowerCase().includes(input)
+        });
         setResults(filteredReports);
     }, [input, reports]);
 
