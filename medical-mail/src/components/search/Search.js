@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 // Bootstrap
 import { Form, FormControl } from 'react-bootstrap';
-// Report Data
+
 
 const Search = (props) => {
 
@@ -22,7 +22,7 @@ const Search = (props) => {
             return report.preview.toLowerCase().includes(input)
         });
         setResults(filteredReports);
-    }, [input, reports]);
+    }, [input, reports, setResults]);
 
     return (
         <Form inline>

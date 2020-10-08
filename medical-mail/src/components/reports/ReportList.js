@@ -8,7 +8,7 @@ const ReportList = ({results, input}) => {
     function renderTags(tags){
         if (tags.length > 0) {
             return (
-            <td>{tags.map(tag => <Button variant="info">{tag}</Button>)}</td>
+            <td>{tags.map(tag => <Button key={tag} variant="info">{tag}</Button>)}</td>
             )
         } else {
             return <td>No tags.</td>
@@ -22,12 +22,12 @@ const ReportList = ({results, input}) => {
             return (
                 results.map(report => {
                     return (
-                        <tbody>
+                        <tbody key={report.id}>
                             <tr>
                                 <td>{report.id}</td>
                                 <td>{report.preview}</td>
                                 {renderTags(report.labels)}
-                                <td><Link exact={true} to={`/report/${report.id}`} variant="outline-info">view report</Link></td>
+                                <td><Link exact={true} to={`/${report.id}`} variant="outline-info">view report</Link></td>
                             </tr>
                         </tbody>
                     )

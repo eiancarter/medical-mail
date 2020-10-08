@@ -1,29 +1,62 @@
-import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 // Styles
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Spinner } from 'react-bootstrap';
 
-const FullReport = (props) => {
+const FullReport = ({results, filters, setFilters}) => {
+    const params = useParams();
+    const [ currentReportIndex, setCurrentReportIndex ] = useState();
+    console.log(results);
 
-    const history = useHistory();
+    useEffect(() => {
+        let labels = results[params.id].labels;
+        setFilters(labels)
+    },[currentReportIndex, results]);
+
+    function nextReport(){
+        if (currentReportIndex < results.length - 1) {
+            setCurrentReportIndex(currentReportIndex + 1)
+        } else {
+            setCurrentReportIndex(currentReportIndex)
+        }
+        return currentReportIndex
+    };
+
+    function previousReport(){
+        if (currentReportIndex > 0) {
+            setCurrentReportIndex(currentReportIndex - 1)
+        } else {
+            setCurrentReportIndex(currentReportIndex)
+        }
+        return currentReportIndex
+    };
+
+    function removeTag(){
+        return results[currentReportIndex].labels.splice(currentReportIndex)
+    };
 
     return (
         <div>
-            <Button variant="info" onClick={history.goBack}>Back</Button>
-            <Link variant="info" to="/">All Reports</Link>
-            <Card className="text-center">
-                <Card.Header>Featured</Card.Header>
-                <Card.Body>
-                    <Card.Title>Special title treatment</Card.Title>
-                    <Card.Text>
-                        With supporting text below as a natural lead-in to additional content.
-                    </Card.Text>
-                </Card.Body>
-                <Card.Footer className="text-muted">
-                    <Button variant="info">Previous</Button>
-                    <Button variant="info">Next</Button>
-                </Card.Footer>
-            </Card>
+            {!results || !results[currentReportIndex] ? <Spinner /> : 
+                <Card className="text-center">
+                    <Card.Header>Report ID: #{results[currentReportIndex].id}</Card.Header>
+                    <Card.Body>
+                        <Card.Title>Content:</Card.Title>
+                        <Card.Text>
+                            {results[currentReportIndex].preview}
+                        </Card.Text>
+                        <Card.Text>
+                            Active Tags:
+                            {results[currentReportIndex].labels.map(label => <Button key={label} onClick={removeTag} variant="secondary">{label}</Button>)}
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer className="text-muted">
+                        <Button disabled={currentReportIndex === 0} onClick={previousReport} variant="info">Previous</Button>
+                        {'  '}
+                        <Button disabled={currentReportIndex === results.length - 1} onClick={nextReport} variant="info">Next</Button>
+                    </Card.Footer>
+                </Card>
+            }
         </div>
     )
 }
