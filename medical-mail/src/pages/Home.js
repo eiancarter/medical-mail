@@ -26,10 +26,6 @@ const Home = () => {
                 filters={filters}
                 setFilters={setFilters}
             />
-            <Filters 
-                filters={filters}
-                setFilters={setFilters}
-            />
             <Switch>
                 <Route exact path='/'>
                     <ReportList
@@ -39,7 +35,11 @@ const Home = () => {
                         setFilters={setFilters}
                     />
                 </Route>
-                <Route exact path='/report/:id'>
+                <Route exact path='/:id'>
+                    <Filters 
+                        filters={filters}
+                        setFilters={setFilters}
+                    />
                     <FullReport 
                         results={results}
                         filters={filters}
